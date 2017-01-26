@@ -1,0 +1,19 @@
+{
+  "name": "buzz_me",
+  "version": "1.0.0",
+  "description": "Buzz me to get stuff done! The new todo app in town.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PoliteDoves/buzz_me.git"
+  },
+  "author": "polite_doves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PoliteDoves/buzz_me/issues"
+  },
+  "homepage": "https://github.com/PoliteDoves/buzz_me#readme"
+}
