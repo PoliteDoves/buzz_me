@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-db = new Sequelize('database_name', 'root', '', {
+db = new Sequelize('buzzme_db', 'root', '', {
   dialect: 'mysql',
   port: 3306
 });
