@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Buzz me to get stuff done! The new todo app in town.",
   "main": "index.js",
-  "author": ["Andrew Slagle", "Renata Maraj"],
+  "author": ["Andrew Slagle", "Renata Maraj", "Cory Wolnewitz"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
