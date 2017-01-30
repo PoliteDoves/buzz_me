@@ -12,7 +12,13 @@
       .state('home', {
         url: '/home',
         controller: 'HomeController',
-        templateUrl: 'components/home/home.html',
+        templateUrl: 'home/home.html',
+        controllerAs: 'vm'
+      })
+      .state('login', {
+        url: '/login',
+        controller: 'LoginController',
+        templateUrl: 'login/login.html',
         controllerAs: 'vm'
       });
 
