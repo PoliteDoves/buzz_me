@@ -10,8 +10,8 @@
     console.log('router', $stateProvider);
 
     $stateProvider
-      .state('home', {
-        url: '/home',
+      .state('landing', {
+        url: '/landing',
         controller: 'LandingController',
         templateUrl: 'app/landing/landing.html',
         controllerAs: 'vm'
@@ -20,6 +20,12 @@
         url: '/login',
         controller: 'LoginController',
         templateUrl: 'app/login/login.html',
+        controllerAs: 'vm'
+      })
+      .state('list', {
+        url: '/list',
+        controller: 'ListController',
+        templateUrl: '/app/list/list.html',
         controllerAs: 'vm'
       });
 
