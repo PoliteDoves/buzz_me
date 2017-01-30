@@ -7,6 +7,7 @@
     .config(config);
 
   function config($stateProvider, lockProvider, $urlRouterProvider) {
+    console.log('router', $stateProvider);
 
     $stateProvider
       .state('home', {
@@ -20,7 +21,12 @@
         controller: 'LoginController',
         templateUrl: 'login/login.html',
         controllerAs: 'vm'
-      });
+      })
+      .state('test', {
+        url: '/test',
+        controller: '',
+        templateUrl: '/client/app/test.html'
+      })
 
     lockProvider.init({
       clientID: 'abNjFPukJoYmF91ksTKj3M2me7iz2Ldv',
