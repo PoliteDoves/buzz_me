@@ -12,6 +12,11 @@
       lock.show();
     }
 
+    function logout() {
+      localStorage.removeItem('id_token');
+      authManager.unauthenticate();
+    }
+
     // Set up the logic for when a user authenticates
     // This method is called from app.run.js
     function registerAuthenticationListener() {
@@ -23,7 +28,8 @@
 
     return {
       login: login,
-      registerAuthenticationListener: registerAuthenticationListener
+      registerAuthenticationListener: registerAuthenticationListener,
+      logout: logout
     }
   }
 })();
