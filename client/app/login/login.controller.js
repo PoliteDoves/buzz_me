@@ -1,6 +1,5 @@
 (function () {
   'use strict';
-  console.log('controller login loaded')
 
   angular
     .module('app')
