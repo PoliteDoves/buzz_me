@@ -27,7 +27,7 @@
       domain: 'buzzme.auth0.com'
     });
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
   }
 
 })();

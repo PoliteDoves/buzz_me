@@ -6,22 +6,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdn.auth0.com/js/lock/10.8/lock.min.js"></script>
-    <script src="node_modules/angular-lock/dist/angular-lock.js"></script>
-    <script src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
-    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="app.run.js"></script>
-    <script type="text/javascript" src="landing/landing.controller.js"></script>
-    <script type="text/javascript" src="login/login.controller.js"></script>
-    <script type="text/javascript" src="auth/auth.service.js"></script>
+    <script src="/scripts/angular-jwt.js"></script>
+    <script src="/scripts/angular-lock.js"></script>
+    <script type="text/javascript" src="/scripts/angular-ui-router.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/app.run.js"></script>
+    <script type="text/javascript" src="app/landing/landing.controller.js"></script>
+    <script type="text/javascript" src="app/login/login.controller.js"></script>
+    <script type="text/javascript" src="app/auth/auth.service.js"></script>
   </head>
   <body>
-    <div ng-app='App'>
-      <div ui-view="whatever the view is">Inside ui-view</div>
+    <div ng-app='app'>
+      <div ui-view>Inside ui-view</div>
       <ul class="collapsible" data-collapsible="accordion">
         <li>
           <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>

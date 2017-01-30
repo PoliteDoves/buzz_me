@@ -5,11 +5,11 @@
 
   angular
     .module('app')
-    .controller('HomeController', HomeController);
+    .controller('LandingController', LandingController);
 
-  HomeController.$inject = ['authService'];
+  LandingController.$inject = ['authService'];
 
-  function HomeController(authService) {
+  function LandingController(authService) {
 
     var vm = this;
     vm.authService = authService;
