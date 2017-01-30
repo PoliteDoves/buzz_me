@@ -1,6 +1,7 @@
 //Landing Controller
 (function () {
 
+  console.log('controller landing loaded')
   'use strict';
 
   angular

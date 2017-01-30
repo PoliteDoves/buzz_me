@@ -7,18 +7,19 @@
     .config(config);
 
   function config($stateProvider, lockProvider, $urlRouterProvider) {
+    console.log('router', $stateProvider);
 
     $stateProvider
       .state('home', {
         url: '/home',
         controller: 'LandingController',
-        templateUrl: 'landing/landing.html',
+        templateUrl: 'app/landing/landing.html',
         controllerAs: 'vm'
       })
       .state('login', {
         url: '/login',
         controller: 'LoginController',
-        templateUrl: 'login/login.html',
+        templateUrl: 'app/login/login.html',
         controllerAs: 'vm'
       });
 
