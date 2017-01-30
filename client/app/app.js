@@ -13,20 +13,15 @@
       .state('home', {
         url: '/home',
         controller: 'LandingController',
-        templateUrl: 'landing/landing.html',
+        templateUrl: 'app/landing/landing.html',
         controllerAs: 'vm'
       })
       .state('login', {
         url: '/login',
         controller: 'LoginController',
-        templateUrl: 'login/login.html',
+        templateUrl: 'app/login/login.html',
         controllerAs: 'vm'
-      })
-      .state('test', {
-        url: '/test',
-        controller: '',
-        templateUrl: '/client/app/test.html'
-      })
+      });
 
     lockProvider.init({
       clientID: 'abNjFPukJoYmF91ksTKj3M2me7iz2Ldv',
