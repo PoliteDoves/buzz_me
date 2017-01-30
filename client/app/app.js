@@ -12,7 +12,7 @@
       .state('home', {
         url: '/home',
         controller: 'LandingController',
-        templateUrl: 'landing/landing.html',
+        templateUrl: './landing/landing.html',
         controllerAs: 'vm'
       })
       .state('login', {
