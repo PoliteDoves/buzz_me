@@ -1,13 +1,16 @@
 <nav>
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Your Life List</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a ng-click="vm.authService.logout()">Logout</a></li>
+    </ul>
   </div>
 </nav>
 <div class="container">
   <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header"><input type="checkbox" id="test5" />
-<label for="test5"></label>First<i class="right material-icons">message</i></div>
+        <label for="test5"></label>First<i class="right material-icons">message</i></div>
       <div class="collapsible-body">
         <ul>
           <li class="sub collapsible-header">This is a sub item<i class="right material-icons">message</i></li>
