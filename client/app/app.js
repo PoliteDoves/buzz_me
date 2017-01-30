@@ -11,8 +11,8 @@
     $stateProvider
       .state('home', {
         url: '/home',
-        controller: 'HomeController',
-        templateUrl: 'home/home.html',
+        controller: 'LandingController',
+        templateUrl: 'landing/landing.html',
         controllerAs: 'vm'
       })
       .state('login', {
