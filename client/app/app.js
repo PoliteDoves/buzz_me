@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router'])
+    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'angular-storage'])
     .config(config);
 
   function config($stateProvider, lockProvider, $urlRouterProvider) {
@@ -26,7 +26,10 @@
         url: '/list',
         controller: 'ListController',
         templateUrl: '/app/list/list.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          requiresLogin: true
+        }
       });
 
     lockProvider.init({
