@@ -24,10 +24,21 @@ module.exports = function(app, express, db) {
   app.post('/api/tasks', function(req, res) {
     console.log('Attempting to create new task');
     console.log('Request Body: ', req.body);
-    db.Tasks.create({
-      dateTime: req.body.dateTime,
-      text: req.body.text
-    });
+
+    db.Users.findAll({
+      where: {
+        email: req.body.email
+      }
+    })
+    .then(function(user) {
+      console.log(user[0].dataValues.id);
+      db.Tasks.create({
+        user_id: user[0].dataValues.id,
+        dateTime: req.body.dateTime,
+        text: req.body.text
+      });
+    })
+
 
     res.send('End!');
   });
