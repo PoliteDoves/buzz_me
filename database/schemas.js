@@ -25,8 +25,7 @@ var Tasks = db.define('tasks', {
   },
 
   user_id: Sequelize.INTEGER,
-  date: Sequelize.DATE,
-  time: Sequelize.TIME,
+  dateTime: Sequelize.DATE,
   text: Sequelize.STRING,
   parent_task: Sequelize.INTEGER
 });
