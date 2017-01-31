@@ -14,11 +14,24 @@ module.exports = function(app, express, db) {
     res.send('End');
   });
 
-  app.get('/api/tasks', function(req, res) {
-    db.Tasks.findAll({})
+  app.get('/api/tasks/:email', function(req, res) {
+    console.log('Req Params Email: ', req.params.email);
+
+    db.Users.findAll({
+      where: {
+        email: req.params.email
+      }
+    })
+    .then(function(user) {
+      db.Tasks.findAll({
+        where: {
+          user_id: user[0].dataValues.id
+        }
+      })
       .then(function(results) {
         res.send(results);
       });
+    })
   });
 
   app.post('/api/tasks', function(req, res) {
