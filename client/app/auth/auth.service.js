@@ -15,7 +15,7 @@
     function logout() {
       store.remove('jwt');
       authManager.unauthenticate();
-      $state.go('/landing');
+      $state.go('landing');
     }
 
     // Set up the logic for when a user authenticates

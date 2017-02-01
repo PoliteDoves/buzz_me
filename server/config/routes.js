@@ -6,12 +6,12 @@ module.exports = function(app, express, db) {
   app.post('/api/users', function(req, res) {
     console.log('Attempting to create new user');
     console.log('Reqest body: ', req.body);
-    db.Users.create({
+    db.Users.findOrCreate({where: {
       name: req.body.name,
-      phone_number: req.body.phoneNumber,
+      //phone_number: req.body.phoneNumber,
       email: req.body.email
-    });
-    res.send('End');
+    }})
+    .then(u=>res.send(u))
   });
 
   app.get('/api/tasks/:email', function(req, res) {
