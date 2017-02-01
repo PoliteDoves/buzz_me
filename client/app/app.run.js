@@ -12,7 +12,7 @@
     // Put the authService on $rootScope so its methods
     // can be accessed from the nav bar
     $rootScope.authService = authService;
-    
+
     // Register the authentication listener that is
     // set up in auth.service.js
     authService.registerAuthenticationListener();
@@ -23,9 +23,7 @@
 
     $rootScope.$on('$stateChangeStart', function(e, to) {
       if (to.data && to.data.required) {
-        console.log("inbetween data and token check")
         if (!store.get('jwt')) {
-          console.log("Fired!");
           e.preventDefault();
           $state.go('landing');
         }

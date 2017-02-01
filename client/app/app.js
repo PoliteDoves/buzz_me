@@ -39,6 +39,4 @@
     $urlRouterProvider.otherwise('/');
   }
 
-  
-
 })();
