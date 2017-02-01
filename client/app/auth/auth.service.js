@@ -9,14 +9,13 @@
   function authService(lock, authManager, $state, store) {
 
     function login() {
-      console.log("Login!")
       lock.show();
     }
 
     function logout() {
-      console.log("Logout!!");
       store.remove('jwt');
       authManager.unauthenticate();
+      $state.go('landing');
     }
 
     // Set up the logic for when a user authenticates
