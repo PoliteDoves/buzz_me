@@ -1,6 +1,7 @@
 var Sequelize = require('sequelize');
 var db = require('./database.js');
 
+// Define and sync the Users table ---------
 var Users = db.define('users', {
   id: {
     type: Sequelize.INTEGER,
@@ -12,7 +13,10 @@ var Users = db.define('users', {
   phone_number: Sequelize.STRING,
   email: Sequelize.STRING
 });
+Users.sync({});
+//------------------------------------------
 
+// Define and sync the Tasks table ---------
 var Tasks = db.define('tasks', {
   id: {
     type: Sequelize.INTEGER,
@@ -21,14 +25,14 @@ var Tasks = db.define('tasks', {
   },
 
   user_id: Sequelize.INTEGER,
-  date: Sequelize.DATE,
-  time: Sequelize.TIME,
+  dateTime: Sequelize.DATE,
   text: Sequelize.STRING,
   parent_task: Sequelize.INTEGER
 });
 
-Users.sync({});
+Users.hasMany(Tasks, {as: 'Tasks', foreignKey: 'user_id'});
 Tasks.sync({});
+//------------------------------------------
 
 module.exports.Users = Users;
 module.exports.Tasks = Tasks;
