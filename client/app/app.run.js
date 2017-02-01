@@ -22,9 +22,10 @@
     lock.interceptHash();
 
     $rootScope.$on('$stateChangeStart', function(e, to) {
-      console.log(store.get('id_token'));
-      if (to.data && to.data.requiresLogin) {
-        if (!store.get('id_token')) {
+      if (to.data && to.data.required) {
+        console.log("inbetween data and token check")
+        if (!store.get('jwt')) {
+          console.log("Fired!");
           e.preventDefault();
           $state.go('landing');
         }

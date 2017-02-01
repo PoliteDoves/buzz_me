@@ -6,7 +6,7 @@
     .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'angular-storage'])
     .config(config);
 
-  function config($stateProvider, lockProvider, $urlRouterProvider) {
+  function config($stateProvider, lockProvider, $urlRouterProvider, $locationProvider) {
     console.log('router', $stateProvider);
 
     $stateProvider
@@ -14,13 +14,10 @@
         url: '/',
         controller: 'LandingController',
         templateUrl: 'app/landing/landing.html',
-        controllerAs: 'vm'
-      })
-      .state('login', {
-        url: '/login',
-        controller: 'LoginController',
-        templateUrl: 'app/login/login.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          required: false
+        }
       })
       .state('list', {
         url: '/list',
@@ -28,16 +25,20 @@
         templateUrl: '/app/list/list.html',
         controllerAs: 'vm',
         data: {
-          requiresLogin: true
+          required: true
         }
       });
 
     lockProvider.init({
       clientID: 'abNjFPukJoYmF91ksTKj3M2me7iz2Ldv',
-      domain: 'buzzme.auth0.com'
+      domain: 'buzzme.auth0.com',
+      loginState: 'landing'
     });
 
+    $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/');
   }
+
+  
 
 })();
