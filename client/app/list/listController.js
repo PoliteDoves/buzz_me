@@ -20,7 +20,12 @@
         }
       })
       .then(user => {
-        console.log('user created', user);
+        $http({
+          method: 'GET',
+          url: `api/tasks/${user.data[0].email}`
+        })
+        .then(tasks=>console.log('tasks', tasks))
+          .catch(e=>console.log('error', e))
       });
       // get lists associated with that user
 

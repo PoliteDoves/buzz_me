@@ -17,7 +17,7 @@ module.exports = function(app, express, db) {
   app.get('/api/tasks/:email', function(req, res) {
     console.log('Req Params Email: ', req.params.email);
 
-    db.Users.findAll({
+    db.Users.findOne({
       where: {
         email: req.params.email
       }
@@ -25,7 +25,7 @@ module.exports = function(app, express, db) {
     .then(function(user) {
       db.Tasks.findAll({
         where: {
-          user_id: user[0].dataValues.id
+          user_id: user.dataValues.id
         }
       })
       .then(function(results) {
@@ -34,25 +34,26 @@ module.exports = function(app, express, db) {
     })
   });
 
-  app.post('/api/tasks', function(req, res) {
+  app.post('/api/tasks/:email', function(req, res) {
     console.log('Attempting to create new task');
     console.log('Request Body: ', req.body);
+    console.log('email', req.params.email);
 
-    db.Users.findAll({
+    db.Users.findOne({
       where: {
-        email: req.body.email
+        email: req.params.email
       }
     })
     .then(function(user) {
-      console.log(user[0].dataValues.id);
       db.Tasks.create({
-        user_id: user[0].dataValues.id,
+        user_id: user.dataValues.id,
         dateTime: req.body.dateTime,
         text: req.body.text
-      });
+      })
+      .then(task => res.send(task))
     })
+    .catch(e=>res.send(`Error: ${e}`))
 
 
-    res.send('End!');
   });
 }
