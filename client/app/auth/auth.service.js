@@ -15,18 +15,15 @@
     function logout() {
       store.remove('jwt');
       authManager.unauthenticate();
-      $state.go('landing');
+      $state.go('/landing');
     }
 
     // Set up the logic for when a user authenticates
     // This method is called from app.run.js
     function registerAuthenticationListener() {
-      console.log("regestered!")
       lock.on('authenticated', function (authResult) {
-        console.log("authentication");
         store.set('jwt', authResult.idToken);
         authManager.authenticate();
-        console.log("auth manager authenticated")
       });
     }
 

@@ -11,7 +11,7 @@
 
     $stateProvider
       .state('landing', {
-        url: '/',
+        url: '/landing',
         controller: 'LandingController',
         templateUrl: 'app/landing/landing.html',
         controllerAs: 'vm',
@@ -20,7 +20,7 @@
         }
       })
       .state('list', {
-        url: '/list',
+        url: '/',
         controller: 'ListController',
         templateUrl: '/app/list/list.html',
         controllerAs: 'vm',

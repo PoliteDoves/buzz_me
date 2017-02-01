@@ -12,6 +12,7 @@
       vm.payload = profile;
     });
 
+
     vm.authService = authService;
 
   }
