@@ -2,42 +2,15 @@
 <nav>
   <div class="nav-wrapper cyan lighten-2">
     <a href="#" class="brand-logo">Your Life List</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <ul id="nav-mobile" class="right">
       <li><a ng-click="vm.authService.logout()">Logout</a></li>
     </ul>
   </div>
 </nav>
 <p>{{vm.payload}}</p>
 <div class="container">
-  <ul class="collapsible" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
-      <label style="display: initial;"></label>Go to the grocery store<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
-      <div class="collapsible-body" style="padding: 0;">
-        <ul class="collection">
-          <li class="collection-item"><input type="checkbox" id="test5" />
-      <label style="display: initial;"></label>Buckwheat<i class="right material-icons">message</i></li>
-          <li class="collection-item"><input type="checkbox" id="test5" />
-      <label for="test5" style="display: initial;"></label>Quinoa<i class="right material-icons">message</i></li>
-          <li class="collection-item"><input type="checkbox" id="test5" />
-      <label for="test5" style="display: initial;"></label>Spelt<i class="right material-icons">message</i></li>
-          <li class="collection-item">...(How it may look before you type to create the list item)</li>
-        </ul>
-      </div>
-    </li>
-    <li>
-      <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
-      <label for="test5" style="display: initial;"></label>Pick up dry-cleaning<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
-      <div class="collection" style="padding: 0;">
-    </li>
-    <li>
-      <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
-      <label for="test5" style="display: initial;"></label>Homework List<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
-      <div class="collapsible-body" style="padding: 0;">
-        <ul class="collection">
-          <li class="collection-item">...<i class="right material-icons">message</i></li>
-        </ul>
-      </div>
-    </li>
-  </ul>
+  <div ng-repeat="task in vm.tasks.data">
+    <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
+      <label for="test5" style="display: initial;"></label>{{task.text}}<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
+  </div>
 </div>
