@@ -1,5 +1,5 @@
 (function () {
-
+//Use strict
   'use strict';
 
   angular
