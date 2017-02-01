@@ -4,8 +4,8 @@ describe('Routing', function () {
   var $route;
   beforeEach(module('app'));
 
-  beforeEach(inject(function ($injector) {
-    $route = $injector.get('$route');
+  beforeEach(module(function ($injector) {
+    $route = $injector.get('$urlRouterProvider');
   }));
 
   it('Should have /login route, template, and controller', function () {
