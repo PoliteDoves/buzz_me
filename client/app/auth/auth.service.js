@@ -6,7 +6,7 @@
     .module('app')
     .service('authService', authService);
 
-  function authService(lock, authManager) {
+  function authService(lock, authManager, $state, store) {
 
     function login() {
       console.log("Login!")
@@ -15,7 +15,7 @@
 
     function logout() {
       console.log("Logout!!");
-      localStorage.removeItem('id_token');
+      store.remove('jwt');
       authManager.unauthenticate();
     }
 
@@ -25,7 +25,7 @@
       console.log("regestered!")
       lock.on('authenticated', function (authResult) {
         console.log("authentication");
-        localStorage.setItem('id_token', authResult.idToken);
+        store.set('jwt', authResult.idToken);
         authManager.authenticate();
         console.log("auth manager authenticated")
       });
