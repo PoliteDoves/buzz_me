@@ -10,7 +10,6 @@
 
     lock.getProfile(store.get('jwt'), function (error, profile) {
       vm.payload = profile;
-      // find or create user in db
       $http({
         method: 'POST',
         url: 'api/users',
@@ -24,13 +23,13 @@
           method: 'GET',
           url: `api/tasks/${user.data[0].email}`
         })
-        .then(tasks=>console.log('tasks', tasks))
-          .catch(e=>console.log('error', e))
+        .then(tasks=>{
+          console.log('tasks', tasks);
+          vm.tasks = tasks
+        })
+        .catch(e=>console.log('error', e))
       });
-      // get lists associated with that user
-
     });
-
 
     vm.authService = authService;
 
