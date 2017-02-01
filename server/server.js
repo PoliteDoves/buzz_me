@@ -1,12 +1,15 @@
 var express = require('express');
 var bodyParser= require('body-parser');
 var path= require('path');
-var morgan = require('morgan');
 var db = require('../database/schemas.js');
 var app = express();
 var port = process.env.PORT || 3021;
 
-app.use(morgan('dev'));
+if(!process.env.PORT) {
+  var morgan = require('morgan');
+  app.use(morgan('dev'));
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
