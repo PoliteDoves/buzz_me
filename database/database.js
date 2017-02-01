@@ -1,9 +1,13 @@
 var Sequelize = require('sequelize');
 
-db = new Sequelize('buzzme_db', 'root', '', {
-  dialect: 'mysql',
-  port: 3306
-});
+if(process.env.DATABASE_URL) {
+  db = new Sequelize(process.env.DATABASE_URL);
+} else {
+  db = new Sequelize('buzzme_db', 'root', '', {
+    dialect: 'mysql',
+    port: 3306
+  });
+}
 
 db.authenticate()
   .then(function(err) {
