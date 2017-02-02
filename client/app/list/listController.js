@@ -5,7 +5,7 @@
     .module('app')
     .controller('ListController', ListController);
 
-  function ListController(ListFactory, $http, authService, jwtHelper, store, lock) {
+  function ListController(ListFactory, $http, authService, jwtHelper, store, lock, $locale) {
     var vm = this;
     vm.task = '';
 
@@ -30,6 +30,22 @@
           ListFactory.getUserTasks(email)
             .then(tasks=>vm.tasks = tasks)
         })
+    }
+
+    vm.formatDate = function (date) {
+    function pad(n) {
+        return n < 10 ? '0' + n : n;
+    }
+
+    return date && date.getFullYear()
+        + '-' + pad(date.getMonth() + 1)
+        + '-' + pad(date.getDate());
+    }
+
+    vm.parseDate = function (s) {
+    var tokens = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+
+    return tokens && new Date(tokens[1], tokens[2] - 1, tokens[3]);
     }
   }
 }());
