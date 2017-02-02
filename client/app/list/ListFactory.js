@@ -22,10 +22,20 @@
         url: `api/tasks/${email}`
       })
 
+    const createTask = (text, email) =>
+      $http({
+        method: 'POST',
+        url: `api/tasks/${email}`,
+        data: {
+          text: text
+        }
+      })
+
 
     return {
       findOrCreateUser: findOrCreateUser,
-      getUserTasks: getUserTasks
+      getUserTasks: getUserTasks,
+      createTask: createTask
     }
   }
 
