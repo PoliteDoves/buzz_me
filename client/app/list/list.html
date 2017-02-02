@@ -7,8 +7,8 @@
     </ul>
   </div>
 </nav>
-<p>{{vm.payload}}</p>
 <div class="container">
+  <h1 class="cyan-text text-lighten-2">{{vm.payload.given_name}}'s Tasks</h1>
   <div ng-repeat="task in vm.tasks.data">
     <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
       <label for="test5" style="display: initial;"></label>{{task.text}}<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
