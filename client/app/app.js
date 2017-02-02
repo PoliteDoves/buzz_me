@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'angular-storage'])
+    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'angular-storage','mp.datePicker'])
     .config(config);
 
   function config($stateProvider, lockProvider, $urlRouterProvider, $locationProvider) {
