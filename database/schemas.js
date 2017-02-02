@@ -27,10 +27,12 @@ var Tasks = db.define('tasks', {
   user_id: Sequelize.INTEGER,
   dateTime: Sequelize.DATE,
   text: Sequelize.STRING,
+  isCompleted: Sequelize.BOOLEAN,
+  interval: Sequelize.INTEGER,
   parent_task: Sequelize.INTEGER
 });
 
-Users.hasMany(Tasks, {as: 'Tasks', foreignKey: 'user_id'});
+Tasks.belongsTo(Users, {foreignKey: 'user_id'});
 Tasks.sync({});
 //------------------------------------------
 
