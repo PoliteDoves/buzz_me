@@ -17,6 +17,7 @@ app.use(express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/../node_modules'));
 
 require('./config/routes.js')(app, express, db);
+require('./messages.js')(app, db);
 
 app.listen(port, function() {
   console.log('Listening on ' + port);
