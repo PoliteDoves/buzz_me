@@ -48,7 +48,8 @@ module.exports = function(app, express, db) {
       db.Tasks.create({
         user_id: user.dataValues.id,
         dateTime: req.body.dateTime,
-        text: req.body.text
+        text: req.body.text,
+        isCompleted: req.body.isCompleted
       })
       .then(task => res.send(task))
     })
