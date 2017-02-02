@@ -14,8 +14,9 @@
     <input id="new-task" type="text" ng-model="vm.task">
     <label for="new-task">New Task</label>
   </div>
-  <date-picker ng-model="date">
+  <date-picker ng-model="date" format-date="formatDate" parse-date="parseDate">
 </date-picker>
+<input ng-model="date">
     <a class="btn-floating btn-small waves-effect waves-light cyan" ng-click="vm.submit(vm.task, vm.payload.email)"><i class="material-icons">add</i></a>
 </div>
 <div ng-repeat="task in vm.tasks.data">
