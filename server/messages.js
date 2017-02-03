@@ -41,14 +41,15 @@ module.exports = function(app, db) {
       var minPassed = Math.floor(msPassed/60000);
       if (task.interval) {
         var isTime = (minPassed % task.interval) === 0;
-        console.log((minPassed % task.interval));
       } else {
-        var isTime = true;
+        console.log('----Interval did not exist. Only sending message once----');
+        if (minPassed > 0.8) {
+          var isTime = false;
+        } else {
+          var isTime = true;
+        }
       }
       task.attempt = minPassed/task.interval;
-      console.log('Task.attempt: ', task.attempt);
-      console.log('msPassed: ', msPassed);
-      console.log('isTime: ', isTime);
       if (msPassed > 0 && isTime) {
         console.log('Returning true');
         return true;
@@ -58,9 +59,7 @@ module.exports = function(app, db) {
         return false;
       }
     }).map(function(task){
-      console.log('Tas.dataValues.text: ', task.dataValues.text);
       task.message = generateMessage(task.attempt, task.dataValues.text);
-      console.log('Sending message: ' + task.message + ' to: ' + task.dataValues.user.dataValues.phone_number);
       client.messages.create({
         to: '+19855183301',
         from: '+19855098132',
