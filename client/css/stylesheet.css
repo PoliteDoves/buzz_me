@@ -1,0 +1,15 @@
+.modal {
+  height: 85% !important;
+}
+
+.picker__date-display {
+  height: 160px;
+}
+
+.range-field {
+  margin: 10px 0;
+}
+
+.modal-heading {
+  font-size: 45px;
+}

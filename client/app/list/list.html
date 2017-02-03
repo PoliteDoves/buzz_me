@@ -18,15 +18,18 @@ $('.collapsible').collapsible();
     </div>
     <a class="btn-floating btn-small waves-effect waves-light cyan" ng-click="vm.submit(vm.task, vm.payload.email)"><i class="material-icons">add</i></a>
   </div>
+
   <div ng-repeat="task in vm.tasks.data">
     <div class="collapsible-header" style="padding-right: 0px">
       <input type="checkbox" id="test5" />
       <label for="test5" style="display: initial;"></label>{{task.text}}
-      <a class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
+      <a ng-click="vm.setTaskId(task.id)" class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
     </div>
   </div>
+
   <div id="modal1" class="modal">
     <div class="modal-content">
+      <h1 class="modal-heading thin center-align">Text Message Alerts</h1>
       <input type="date" class="datepicker" placeholder="Date" ng-model="vm.date">
       <div class="input-field col s12">
           <input placeholder='Time' ng-model="vm.time" class="timepicker" type="time">
@@ -35,12 +38,15 @@ $('.collapsible').collapsible();
         <input ng-model="vm.interval" type="range" id="text-interval" min="0" max="120" />
         <p>How often would you like to be reminded? {{vm.intervalOutput(vm.interval)}}</p>
       </div>
-      <a class="center-align waves-effect waves-light cyan btn-large"><i class="material-icons left">cloud</i>Buzz Me!</a>
+      <div class="center-align">
+        <a href="#!" ng-click="vm.onTextSubmit()" class="waves-effect waves-light btn-large" id="submitInterval"><i class="material-icons left">cloud</i>Buzz Me!</a>
+      </div>
     </div>
   </div>
 </div>
 <script>
 $(document).ready(function(){
+  $('#submitInterval').on('click', ()=>$('#submitInterval').modal('close'));
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
   $('.modal').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
