@@ -8,6 +8,8 @@
   function ListController(ListFactory, $http, authService, jwtHelper, store, lock, $locale) {
     var vm = this;
     vm.task = '';
+    vm.date = '';
+    vm.time = '';
 
     lock.getProfile(store.get('jwt'), function (error, profile) {
       vm.payload = profile;
@@ -31,6 +33,5 @@
             .then(tasks=>vm.tasks = tasks)
         })
     }
-
   }
 }());
