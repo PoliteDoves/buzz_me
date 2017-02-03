@@ -1,26 +1,54 @@
-<script>$('.collapsible').collapsible();</script>
+<script>
+$('.collapsible').collapsible();
+</script>
 <nav>
-  <div class="nav-wrapper cyan lighten-2">
-    <a href="#" class="brand-logo">Your Life List</a>
-    <ul id="nav-mobile" class="right">
-      <li><a ng-click="vm.authService.logout()">Logout</a></li>
-    </ul>
-  </div>
+    <div class="nav-wrapper cyan lighten-2">
+        <a href="#" class="brand-logo">Your Life List</a>
+        <ul id="nav-mobile" class="right">
+            <li><a ng-click="vm.authService.logout()">Logout</a></li>
+        </ul>
+    </div>
 </nav>
 <div class="container">
-  <h1 class="cyan-text text-lighten-2">{{vm.payload.given_name}}'s Tasks</h1>
-  <div class="row">
-  <div class="input-field col s6">
-    <input id="new-task" type="text" ng-model="vm.task">
-    <label for="new-task">New Task</label>
-  </div>
-  <date-picker ng-model="date" format-date="formatDate" parse-date="parseDate">
-</date-picker>
-<input ng-model="date">
-    <a class="btn-floating btn-small waves-effect waves-light cyan" ng-click="vm.submit(vm.task, vm.payload.email)"><i class="material-icons">add</i></a>
+    <h1 class="cyan-text text-lighten-2">{{vm.payload.given_name}}'s Tasks</h1>
+    <div class="row">
+        <div class="input-field col s6">
+            <input id="new-task" type="text" ng-model="vm.task">
+            <label for="new-task">New Task</label>
+        </div>
+        <a class="btn-floating btn-small waves-effect waves-light cyan" ng-click="vm.submit(vm.task, vm.payload.email)"><i class="material-icons">add</i></a>
+    </div>
+    <div ng-repeat="task in vm.tasks.data">
+        <div class="collapsible-header" style="padding-right: 0px">
+            <input type="checkbox" id="test5" />
+            <label for="test5" style="display: initial;"></label>{{task.text}}
+            <a class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
+        </div>
+    </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <input type="date" class="datepicker">
+      </div>
+    </div>
 </div>
-<div ng-repeat="task in vm.tasks.data">
-  <div class="collapsible-header" style="padding-right: 0px"><input type="checkbox" id="test5" />
-    <label for="test5" style="display: initial;"></label>{{task.text}}<i class="right material-icons" style="margin: 0px 18px 0px 0px;">message</i><i class="right material-icons" style="margin: 0px 15px 0px 0px;">view_list</i></div>
-</div>
-</div>
+<script>
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        console.log(modal, trigger);
+      },
+      complete: function() { console.log("modal closed") } // Callback for Modal close
+    });
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  });
+</script>
