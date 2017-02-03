@@ -31,12 +31,14 @@
         }
       });
 
-    const updateTask = (id, data) =>
-      $http({
+    const updateTask = (id, data) => {
+      console.log('data', data)
+      return $http({
         method: 'PUT',
         url: `api/tasks/${id}`,
         data: data
       });
+    }
 
     const formatTime = (date, time) => {
       const formattedTimeStr = `${time.slice(0,5)} ${time.slice(5)}`
