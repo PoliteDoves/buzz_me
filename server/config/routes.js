@@ -8,10 +8,20 @@ module.exports = function(app, express, db) {
     console.log('Reqest body: ', req.body);
     db.Users.findOrCreate({where: {
       name: req.body.name,
-      //phone_number: req.body.phoneNumber,
       email: req.body.email
     }})
     .then(u=>res.send(u))
+  });
+
+  app.put('/api/users/:email', function(req, res) {
+    db.Users.findOne({
+      where: {
+        email: req.params.email
+      }
+    })
+    .then(function(user) {
+      user.update(req.body);
+    });
   });
 
   app.get('/api/tasks/:email', function(req, res) {
