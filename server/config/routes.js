@@ -72,12 +72,11 @@ module.exports = function(app, express, db) {
         user_id: user.dataValues.id,
         dateTime: req.body.dateTime,
         text: req.body.text,
-        isCompleted: req.body.isCompleted
+        isCompleted: req.body.isCompleted,
+        interval: req.body.interval
       })
       .then(task => res.send(task))
     })
     .catch(e=>res.send(`Error: ${e}`))
-
-
   });
 }
