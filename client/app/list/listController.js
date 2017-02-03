@@ -12,11 +12,13 @@
     vm.time = '';
     vm.interval = 0;
     vm.id;
+    vm.user;
 
     lock.getProfile(store.get('jwt'), function (error, profile) {
       vm.payload = profile;
       ListFactory.findOrCreateUser(profile.name, profile.email)
         .then(user => {
+          vm.user = user;
           ListFactory.getUserTasks(user.data[0].email)
             .then(tasks=>{
               vm.tasks = tasks
@@ -46,10 +48,22 @@
 
     vm.onTextSubmit = function() {
       var data = {};
-      // get date, time, interval from models
-      console.log('date', vm.date, 'time', vm.time, 'interval', vm.interval)
-      // convert date and time to utc
-      // make http request with vm.id
+      var formattedTimeStr = `${vm.time.slice(0,5)} ${vm.time.slice(5)}`
+
+      var dateTime = new Date(`${vm.date} ${formattedTimeStr}`).toUTCString()
+
+      var data = {
+        dateTime: dateTime,
+        interval: vm.interval
+      }
+
+      $http({
+        method: 'PUT',
+        url: `api/tasks/${vm.id}`,
+        data: data
+      }).then((result)=>{
+        console.log('result', result);
+      })
     }
 
     vm.setTaskId = function(id) {
