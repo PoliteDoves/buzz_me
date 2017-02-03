@@ -34,6 +34,19 @@ module.exports = function(app, express, db) {
     })
   });
 
+  app.put('/api/tasks/:id', function(req, res) {
+    console.log('Got a PUT request: ', req.body);
+    db.Tasks.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(task) {
+      task.update(req.body);
+      res.send(task);
+    });
+  });
+
   app.post('/api/tasks/:email', function(req, res) {
     console.log('Attempting to create new task');
     console.log('Request Body: ', req.body);
