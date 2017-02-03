@@ -20,7 +20,7 @@
       $http({
         method: 'GET',
         url: `api/tasks/${email}`
-      })
+      });
 
     const createTask = (text, email) =>
       $http({
@@ -29,15 +29,27 @@
         data: {
           text: text
         }
-      })
+      });
+
+    const updateTask = (id, data) =>
+      $http({
+        method: 'PUT',
+        url: `api/tasks/${id}`,
+        data: data
+      });
+
+    const formatTime = (date, time) => {
+      const formattedTimeStr = `${time.slice(0,5)} ${time.slice(5)}`
+      return new Date(`${date} ${formattedTimeStr}`).toUTCString();
+    };
 
 
     return {
       findOrCreateUser: findOrCreateUser,
       getUserTasks: getUserTasks,
-      createTask: createTask
+      createTask: createTask,
+      updateTask: updateTask,
+      formatTime: formatTime
     }
-  }
-
-
+  };
 }());
