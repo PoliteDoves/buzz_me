@@ -47,23 +47,18 @@
     }
 
     vm.onTextSubmit = function() {
-      var data = {};
-      var formattedTimeStr = `${vm.time.slice(0,5)} ${vm.time.slice(5)}`
-
-      var dateTime = new Date(`${vm.date} ${formattedTimeStr}`).toUTCString()
+      var formattedDate = ListFactory.formatTime(vm.date, vm.time);
 
       var data = {
-        dateTime: dateTime,
+        dateTime: formattedDate,
         interval: vm.interval
       }
 
-      $http({
-        method: 'PUT',
-        url: `api/tasks/${vm.id}`,
-        data: data
-      }).then((result)=>{
-        console.log('result', result);
-      })
+      ListFactory.updateTask(vm.id, data)
+        .then((result)=>{
+          // TODO let user know it was successful
+          console.log('result', result);
+        })
     }
 
     vm.setTaskId = function(id) {
