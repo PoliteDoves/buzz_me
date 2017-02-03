@@ -48,10 +48,11 @@
 
     vm.onTextSubmit = function() {
       var formattedDate = ListFactory.formatTime(vm.date, vm.time);
+      var interval = vm.interval === 0 ? null : vm.interval;
 
       var data = {
         dateTime: formattedDate,
-        interval: vm.interval
+        interval: interval
       }
 
       ListFactory.updateTask(vm.id, data)
