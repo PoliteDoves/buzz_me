@@ -3,9 +3,22 @@ $('.collapsible').collapsible();
 </script>
 <nav>
   <div class="nav-wrapper cyan lighten-2">
-    <a href="#" class="brand-logo">Your Life List</a>
+  <ul id="slide-out" class="side-nav">
+    <li><div class="userView">
+      <div class="background">
+        <img src="{{vm.payload.picture}}">
+      </div>
+      <a href="#!user"><img class="circle" src="{{vm.payload.picture}}"></a>
+      <a href="#!name"><span class="white-text name">{{vm.payload.given_name}}</span></a>
+      <a href="#!email"><span class="white-text email">{{vm.payload.email}}</span></a>
+    </div></li>
+    <li><a href="#!"><i class="material-icons left">contact phone</i>Phone Number: <i>{{vm.user.data[0].phone_number}}</i></a></li>
+    <li><a href="#!"><i class="material-icons left">contact mail</i>Email: {{vm.payload.email}}</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="snb left"><i class="material-icons">menu</i></a>
+    <a href="#" class="brand-logo center">Your Life List</a>
     <ul id="nav-mobile" class="right">
-      <li><a ng-click="vm.authService.logout()">Logout</a></li>
+        <li><a ng-click="vm.authService.logout()">Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -62,4 +75,20 @@ $(document).ready(function(){
   });
   $('.timepicker').pickatime({})
 });
+</script>
+<script>
+$(document).ready(function(){
+    $('.snb').sideNav({
+      dismissible: true, // sideNav can be dismissed by clicking outside of the sideNav
+      opacity: .5, // Opacity of sideNav background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(sideNav, trigger) { // Callback for sideNav open. sideNav and trigger parameters available.
+        console.log(sideNav, trigger);
+      },
+      complete: function() { console.log("sideNav closed") } // Callback for sideNav close
+    });
+  });
 </script>
