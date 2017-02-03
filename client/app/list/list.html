@@ -34,8 +34,8 @@ $('.collapsible').collapsible();
 
   <div ng-repeat="task in vm.tasks.data">
     <div class="collapsible-header" style="padding-right: 0px">
-      <input type="checkbox" id="test5" />
-      <label for="test5" style="display: initial;"></label>{{task.text}}
+      <input type="checkbox" id="{{task.id}}" />
+      <label for="{{task.id}}" style="display: initial;"></label>{{task.text}}
       <a ng-click="vm.setTaskId(task.id)" class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
     </div>
   </div>

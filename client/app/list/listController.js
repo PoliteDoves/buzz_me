@@ -63,6 +63,7 @@
     }
 
     vm.setTaskId = function(id) {
+      ListFactory.updateTask(id, {isComplete: true});
       vm.id = id;
     }
   }
