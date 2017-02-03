@@ -32,8 +32,8 @@ var Tasks = db.define('tasks', {
   parent_task: Sequelize.INTEGER
 });
 
-Tasks.belongsTo(Users, {foreignKey: 'user_id'});
 Tasks.sync({});
+Tasks.belongsTo(Users, {foreignKey: 'user_id'});
 //------------------------------------------
 
 module.exports.Users = Users;
