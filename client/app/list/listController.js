@@ -62,8 +62,15 @@
         })
     }
 
+    vm.completeTask = function(task) {
+      ListFactory.updateTask(task.id, {isCompleted: !task.isCompleted})
+        .then(function(result) {
+          ListFactory.getUserTasks(vm.payload.email)
+            .then(tasks=>vm.tasks = tasks)
+        })
+    }
+
     vm.setTaskId = function(id) {
-      ListFactory.updateTask(id, {isComplete: true});
       vm.id = id;
     }
   }
