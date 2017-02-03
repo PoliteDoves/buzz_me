@@ -17,12 +17,10 @@ module.exports = function(app, db) {
       "!$%&",
       "Crawl in a hole."
     ]
-    if (attempt === Infinity) {
-      attempt = Math.floor(Math.random() * messages.length);
-    } else {
-      attempt = attempt || Math.floor(Math.random() * messages.length);
-    }
-    return messages[attempt];
+    var index = Math.floor(Math.random() * messages.length);
+
+    console.log(messages[index]);
+    return messages[index];
   }
 
   db.Tasks.findAll({
@@ -34,15 +32,23 @@ module.exports = function(app, db) {
   .then(function(tasks) {
     var currentTime = new Date();
     tasks.filter(function (task) {
+      if (!task.dataValues.dateTime) {
+        console.log('Skipping entry because no date/time was given');
+        return false;
+      }
       var taskTime = new Date(task.dataValues.dateTime);
       var msPassed = currentTime - taskTime;
       var minPassed = Math.floor(msPassed/60000);
       if (task.interval) {
         var isTime = (minPassed % task.interval) === 0;
+        console.log((minPassed % task.interval));
       } else {
         var isTime = true;
       }
       task.attempt = minPassed/task.interval;
+      console.log('Task.attempt: ', task.attempt);
+      console.log('msPassed: ', msPassed);
+      console.log('isTime: ', isTime);
       if (msPassed > 0 && isTime) {
         console.log('Returning true');
         return true;
@@ -52,6 +58,7 @@ module.exports = function(app, db) {
         return false;
       }
     }).map(function(task){
+      console.log('Tas.dataValues.text: ', task.dataValues.text);
       task.message = generateMessage(task.attempt, task.dataValues.text);
       console.log('Sending message: ' + task.message + ' to: ' + task.dataValues.user.dataValues.phone_number);
       client.messages.create({
@@ -59,6 +66,9 @@ module.exports = function(app, db) {
         from: '+19855098132',
         body: task.message
       }, function(err, message) {
+        if (err) {
+          throw err;
+        }
         console.log(message.sid);
       });
     });

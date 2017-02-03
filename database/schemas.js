@@ -27,13 +27,16 @@ var Tasks = db.define('tasks', {
   user_id: Sequelize.INTEGER,
   dateTime: Sequelize.DATE,
   text: Sequelize.STRING,
-  isCompleted: Sequelize.BOOLEAN,
+  isCompleted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   interval: Sequelize.INTEGER,
   parent_task: Sequelize.INTEGER
 });
 
-Tasks.belongsTo(Users, {foreignKey: 'user_id'});
 Tasks.sync({});
+Tasks.belongsTo(Users, {foreignKey: 'user_id'});
 //------------------------------------------
 
 module.exports.Users = Users;
