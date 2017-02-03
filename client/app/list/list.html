@@ -31,6 +31,11 @@ $('.collapsible').collapsible();
       <div class="input-field col s12">
           <input placeholder='Time' ng-model="vm.time" class="timepicker" type="time">
       </div>
+      <div class="range-field">
+        <input ng-model="vm.interval" type="range" id="text-interval" min="0" max="120" />
+        <p>How often would you like to be reminded? {{vm.intervalOutput(vm.interval)}}</p>
+      </div>
+      <a class="center-align waves-effect waves-light cyan btn-large"><i class="material-icons left">cloud</i>Buzz Me!</a>
     </div>
   </div>
 </div>
@@ -43,11 +48,7 @@ $(document).ready(function(){
     inDuration: 300, // Transition in duration
     outDuration: 200, // Transition out duration
     startingTop: '4%', // Starting top style attribute
-    endingTop: '10%', // Ending top style attribute
-    ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-      console.log(modal, trigger);
-    },
-    complete: function() { console.log("modal closed") } // Callback for Modal close
+    endingTop: '10%' // Ending top style attribute
   });
   $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month

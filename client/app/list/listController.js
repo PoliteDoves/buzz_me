@@ -10,6 +10,7 @@
     vm.task = '';
     vm.date = '';
     vm.time = '';
+    vm.interval = 0;
 
     lock.getProfile(store.get('jwt'), function (error, profile) {
       vm.payload = profile;
@@ -32,6 +33,14 @@
           ListFactory.getUserTasks(email)
             .then(tasks=>vm.tasks = tasks)
         })
+    }
+
+    vm.intervalOutput = function(num) {
+      if(num === 0) { return "Just Once"; }
+      if(num === 1) { return "Every Minute!"; }
+      if(num === 60) { return "Every Hour"; }
+      if(num === 120) { return "Every 2 Hours"; }
+      return `Every ${num} minutes`;
     }
   }
 }());
