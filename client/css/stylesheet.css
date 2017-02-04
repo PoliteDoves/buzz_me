@@ -25,5 +25,10 @@
 }
 
 .delete-all {
-  color: red;
+  color: white;
+}
+
+.btn {
+  text-transform: none;
+  padding: 0px 1rem;
 }
