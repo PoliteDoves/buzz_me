@@ -32,7 +32,23 @@ $('.collapsible').collapsible();
     <a class="btn-floating btn-small waves-effect waves-light cyan" ng-click="vm.submit(vm.task, vm.payload.email)"><i class="material-icons">add</i></a>
   </div>
 
-  <div ng-repeat="task in vm.tasks.data">
+  <div ng-if="vm.displayHeaders('incomplete')">
+    <p class="incompleted-header">Incomplete Tasks</p>
+    <hr />
+  </div>
+  <div ng-repeat="task in vm.tasks.data | filter:{isCompleted: false}">
+    <div class="collapsible-header" style="padding-right: 0px">
+      <input ng-click="vm.completeTask(task)" type="checkbox" id="{{task.id}}" ng-checked="{{task.isCompleted}}"/>
+      <label for="{{task.id}}" style="display: initial;"></label>{{task.text}}
+      <a ng-click="vm.setTaskId(task.id)" class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
+    </div>
+  </div>
+
+  <div ng-if="vm.displayHeaders('complete')">
+    <p class="completed-header">Completed Tasks</p>
+    <hr />
+  </div>
+  <div ng-repeat="task in vm.tasks.data | filter:{isCompleted: true}">
     <div class="collapsible-header" style="padding-right: 0px">
       <input ng-click="vm.completeTask(task)" type="checkbox" id="{{task.id}}" ng-checked="{{task.isCompleted}}"/>
       <label for="{{task.id}}" style="display: initial;"></label>{{task.text}}

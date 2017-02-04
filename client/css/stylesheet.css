@@ -13,3 +13,13 @@
 .modal-heading {
   font-size: 45px;
 }
+
+.completed-header {
+  margin-top: 25px;
+  font-size: 15px;
+}
+
+.incompleted-header {
+  margin-top: 25px;
+  font-size: 15px;
+}
