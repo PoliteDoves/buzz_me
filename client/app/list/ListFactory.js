@@ -69,7 +69,8 @@
       updateTask: updateTask,
       formatTime: formatTime,
       deleteTask: deleteTask,
-      deleteAllTasks: deleteAllTasks
+      deleteAllTasks: deleteAllTasks,
+      updateUser: updateUser
     }
   };
 }());
