@@ -59,17 +59,20 @@ module.exports = function(app, db) {
         return false;
       }
     }).map(function(task){
-      task.message = generateMessage(task.attempt, task.dataValues.text);
-      client.messages.create({
-        to: task.user.phoneNumber || '+19855183301',
-        from: '+19855098132',
-        body: task.message
-      }, function(err, message) {
-        if (err) {
-          throw err;
-        }
-        console.log(message.sid);
-      });
+      if (task.user.phoneNumber) {
+        task.message = generateMessage(task.attempt, task.dataValues.text);
+
+        client.messages.create({
+          to: '+1' + task.user.phoneNumber,
+          from: '+19855098132',
+          body: task.message
+        }, function(err, message) {
+          if (err) {
+            throw err;
+          }
+          console.log(message.sid);
+        });
+      }
     });
   });
 };
