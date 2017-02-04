@@ -71,6 +71,7 @@
     }
 
     vm.setTask = function(task) {
+      console.log('task in setTask', task)
       vm.task = task;
     }
 
@@ -91,6 +92,23 @@
           ListFactory.getUserTasks(vm.payload.email)
             .then(tasks=>vm.tasks = tasks)
         )
+    }
+
+    vm.datePlaceHolder = function() {
+      if (!vm.task || !vm.task.dateTime) { return "Date"; }
+      return new Date(vm.task.dateTime).toDateString();
+    }
+
+    vm.timePlaceHolder = function() {
+      console.log('task', vm.task)
+      if (!vm.task || !vm.task.dateTime) { return "Time"; }
+      return new Date(vm.task.dateTime).toLocaleTimeString();
+    }
+
+    vm.intervalPlaceHolder = function() {
+      console.log('inteval', vm.task);
+      if (!vm.task || !vm.task.interval) { return 0; }
+      return vm.task.interval;
     }
   }
 }());

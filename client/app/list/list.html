@@ -61,12 +61,12 @@ $('.collapsible').collapsible();
   <div id="modal1" class="modal">
     <div class="modal-content">
       <h1 class="modal-heading thin center-align">Text Message Alerts</h1>
-      <input type="date" class="datepicker" placeholder="{{vm.task.date}}" ng-model="vm.task.date">
+      <input type="date" class="datepicker" placeholder="{{vm.datePlaceHolder()}}" ng-model="vm.task.date">
       <div class="input-field col s12">
-        <input placeholder="{{vm.task.time}}" ng-model="vm.task.time" class="timepicker" type="time">
+        <input placeholder="{{vm.timePlaceHolder()}}" ng-model="vm.task.time" class="timepicker" type="time">
       </div>
       <div class="range-field">
-        <input ng-model="vm.task.interval" type="range" id="text-interval" min="0" max="120" />
+        <input type="range" name="range" ng-model="vm.task.interval" id="text-interval" min="0" max="120" />
         <p>How often would you like to be reminded? {{vm.intervalOutput()}}</p>
       </div>
       <div class="center-align">
