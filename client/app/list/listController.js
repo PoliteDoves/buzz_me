@@ -74,7 +74,7 @@
     }
 
     vm.displayHeaders = function(complete) {
-      if (!vm.tasks.data) { return false; }
+      if (!vm.tasks) { return false; }
       var completed = vm.tasks.data.filter(t => t.isCompleted);
 
       if (complete === 'incomplete') {
