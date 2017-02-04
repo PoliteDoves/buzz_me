@@ -80,12 +80,22 @@ module.exports = function(app, express, db) {
     .catch(e=>res.send(`Error: ${e}`))
   });
 
-  app.delete('/api/tasks/:id', function(req, res) {
+  app.delete('/api/task/:id', function(req, res) {
     db.Tasks.destroy({
       where: { id: req.params.id }
     })
     .then(function() {
       res.send('Task deleted');
+    });
+  });
+  app.delete('/api/tasks', function(req, res) {
+    db.Tasks.destroy({
+      where: {
+        isCompleted: true
+      }
+    })
+    .then(e => {
+      res.send('All completed tasks were deleted');
     });
   });
 }
