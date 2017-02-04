@@ -11,7 +11,7 @@
 }
 
 .modal-heading {
-  font-size: 45px;
+  font-size: 25px;
 }
 
 .completed-header {
@@ -22,4 +22,8 @@
 .incompleted-header {
   margin-top: 25px;
   font-size: 15px;
+}
+
+.delete-all {
+  color: red;
 }

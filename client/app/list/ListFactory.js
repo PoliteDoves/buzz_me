@@ -49,13 +49,20 @@
         url: `api/task/${id}`,
       });
 
+    const deleteAllTasks = (email) =>
+      $http({
+        method: 'DELETE',
+        url: `api/tasks/${email}`
+      });
+
     return {
       findOrCreateUser: findOrCreateUser,
       getUserTasks: getUserTasks,
       createTask: createTask,
       updateTask: updateTask,
       formatTime: formatTime,
-      deleteTask: deleteTask
+      deleteTask: deleteTask,
+      deleteAllTasks: deleteAllTasks
     }
   };
 }());

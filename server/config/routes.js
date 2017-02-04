@@ -10,7 +10,7 @@ module.exports = function(app, express, db) {
       name: req.body.name,
       email: req.body.email
     }})
-    .then(u=>res.send(u))
+      .then(u=>res.send(u))
   });
 
   app.put('/api/users/:email', function(req, res) {
@@ -19,9 +19,9 @@ module.exports = function(app, express, db) {
         email: req.params.email
       }
     })
-    .then(function(user) {
-      user.update(req.body);
-    });
+      .then(function(user) {
+        user.update(req.body);
+      });
   });
 
   app.get('/api/tasks/:email', function(req, res) {
@@ -32,16 +32,16 @@ module.exports = function(app, express, db) {
         email: req.params.email
       }
     })
-    .then(function(user) {
-      db.Tasks.findAll({
-        where: {
-          user_id: user.dataValues.id
-        }
+      .then(function(user) {
+        db.Tasks.findAll({
+          where: {
+            user_id: user.dataValues.id
+          }
+        })
+          .then(function(results) {
+            res.send(results);
+          });
       })
-      .then(function(results) {
-        res.send(results);
-      });
-    })
   });
 
   app.put('/api/tasks/:id', function(req, res) {
@@ -51,10 +51,10 @@ module.exports = function(app, express, db) {
         id: req.params.id
       }
     })
-    .then(function(task) {
-      task.update(req.body);
-      res.send(task);
-    });
+      .then(function(task) {
+        task.update(req.body);
+        res.send(task);
+      });
   });
 
   app.post('/api/tasks/:email', function(req, res) {
@@ -67,36 +67,45 @@ module.exports = function(app, express, db) {
         email: req.params.email
       }
     })
-    .then(function(user) {
-      db.Tasks.create({
-        user_id: user.dataValues.id,
-        dateTime: req.body.dateTime,
-        text: req.body.text,
-        isCompleted: req.body.isCompleted,
-        interval: req.body.interval
+      .then(function(user) {
+        db.Tasks.create({
+          user_id: user.dataValues.id,
+          dateTime: req.body.dateTime,
+          text: req.body.text,
+          isCompleted: req.body.isCompleted,
+          interval: req.body.interval
+        })
+          .then(task => res.send(task))
       })
-      .then(task => res.send(task))
-    })
-    .catch(e=>res.send(`Error: ${e}`))
+      .catch(e=>res.send(`Error: ${e}`))
   });
 
   app.delete('/api/task/:id', function(req, res) {
     db.Tasks.destroy({
       where: { id: req.params.id }
     })
-    .then(function() {
-      res.send('Task deleted');
-    });
+      .then(function() {
+        res.send('Task deleted');
+      });
   });
 
-  app.delete('/api/tasks', function(req, res) {
-    db.Tasks.destroy({
+  app.delete('/api/tasks/:email', function(req, res) {
+    console.log('second')
+    db.Users.findOne({
       where: {
-        isCompleted: true
+        email: req.params.email
       }
     })
-    .then(e => {
-      res.send('All completed tasks were deleted');
-    });
-  });
+    .then(function(user) {
+      db.Tasks.destroy({
+        where: {
+          user_id: user.dataValues.id,
+          isCompleted: true
+        }
+      })
+      .then(function() {
+        res.send("All destroyed")
+      })
+    })
+  })
 }
