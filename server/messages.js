@@ -61,7 +61,8 @@ module.exports = function(app, db) {
     }).map(function(task){
       task.message = generateMessage(task.attempt, task.dataValues.text);
       client.messages.create({
-        to: '+19855183301',
+        //to: '+19855183301',
+        to: '+19099652237',
         from: '+19855098132',
         body: task.message
       }, function(err, message) {

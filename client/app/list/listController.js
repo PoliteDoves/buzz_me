@@ -7,10 +7,10 @@
 
   function ListController(ListFactory, $http, authService, jwtHelper, store, lock, $locale) {
     var vm = this;
-    vm.task = '';
-    vm.date = '';
-    vm.time = '';
-    vm.interval = 0;
+    vm.text = '';
+    vm.task;
+    vm.date = 'Date';
+    vm.time = 'Time';
     vm.id;
     vm.user;
 
@@ -31,13 +31,14 @@
     vm.submit = function(text, email) {
       ListFactory.createTask(text, email)
       .then(task => {
-        vm.task = '';
+        vm.text = '';
         ListFactory.getUserTasks(email)
           .then(tasks=>vm.tasks = tasks)
       })
     }
 
-    vm.intervalOutput = function(num) {
+    vm.intervalOutput = function() {
+      var num = vm.task.interval;
       if(num === 0) { return "Just Once"; }
       if(num === 1) { return "Every Minute!"; }
       if(num === 60) { return "Every Hour"; }
@@ -46,15 +47,15 @@
     }
 
     vm.onTextSubmit = function() {
-      var formattedDate = ListFactory.formatTime(vm.date, vm.time);
-      var interval = vm.interval === 0 ? null : vm.interval;
+      var formattedDate = ListFactory.formatTime(vm.task.date, vm.task.time);
+      var interval = vm.task.interval === 0 ? null : vm.task.interval;
 
       var data = {
         dateTime: formattedDate,
         interval: interval
       }
 
-      ListFactory.updateTask(vm.id, data)
+      ListFactory.updateTask(vm.task.id, data)
       .then((result) => {
         // TODO let user know it was successful
         console.log('result', result);
@@ -69,8 +70,8 @@
       })
     }
 
-    vm.setTaskId = function(id) {
-      vm.id = id;
+    vm.setTask = function(task) {
+      vm.task = task;
     }
 
     vm.displayHeaders = function(complete) {
