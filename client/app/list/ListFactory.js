@@ -43,13 +43,19 @@
       return new Date(`${date} ${formattedTimeStr}`).toUTCString();
     };
 
+    const deleteTask = (id) =>
+      $http({
+        method: 'DELETE',
+        url: `api/task/${id}`,
+      });
 
     return {
       findOrCreateUser: findOrCreateUser,
       getUserTasks: getUserTasks,
       createTask: createTask,
       updateTask: updateTask,
-      formatTime: formatTime
+      formatTime: formatTime,
+      deleteTask: deleteTask
     }
   };
 }());

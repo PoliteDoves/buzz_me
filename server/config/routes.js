@@ -88,6 +88,7 @@ module.exports = function(app, express, db) {
       res.send('Task deleted');
     });
   });
+
   app.delete('/api/tasks', function(req, res) {
     db.Tasks.destroy({
       where: {
