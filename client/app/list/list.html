@@ -40,6 +40,7 @@ $('.collapsible').collapsible();
     <div class="collapsible-header" style="padding-right: 0px">
       <input ng-click="vm.completeTask(task)" type="checkbox" id="{{task.id}}" ng-checked="{{task.isCompleted}}"/>
       <label for="{{task.id}}" style="display: initial;"></label>{{task.text}}
+      <a ng-click="vm.deleteTask(task.id)"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">delete</i></a>
       <a ng-click="vm.setTaskId(task.id)" class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
     </div>
   </div>
@@ -52,6 +53,7 @@ $('.collapsible').collapsible();
     <div class="collapsible-header" style="padding-right: 0px">
       <input ng-click="vm.completeTask(task)" type="checkbox" id="{{task.id}}" ng-checked="{{task.isCompleted}}"/>
       <label for="{{task.id}}" style="display: initial;"></label>{{task.text}}
+      <a ng-click="vm.deleteTask(task.id)"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">delete</i></a>
       <a ng-click="vm.setTaskId(task.id)" class="modal-trigger" href="#modal1"><i class="right material-icons" style="margin: 0px 15px 0px 0px;">phonelink_ring</i></a>
     </div>
   </div>

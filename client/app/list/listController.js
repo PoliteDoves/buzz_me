@@ -83,5 +83,13 @@
         return completed.length === 0 ? false : true;
       }
     }
+
+    vm.deleteTask = function(id) {
+      ListFactory.deleteTask(id)
+        .then(t =>
+          ListFactory.getUserTasks(vm.payload.email)
+            .then(tasks=>vm.tasks = tasks)
+        )
+    }
   }
 }());
