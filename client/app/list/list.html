@@ -12,8 +12,16 @@ $('.collapsible').collapsible();
       <a href="#!name"><span class="white-text name">{{vm.payload.given_name}}</span></a>
       <a href="#!email"><span class="white-text email">{{vm.payload.email}}</span></a>
     </div></li>
-    <li><a href="#!"><i class="material-icons">contact phone</i>Phone Number: <i>{{vm.user.data[0].phone_number}}</i></a></li>
-    <li><a href="#!"><i class="material-icons left">contact mail</i>Email: {{vm.payload.email}}</a></li>
+    <div ng-hide="numberEditorEnabled">
+      <li ng-click="enableEditor"><a href="#!" ng-click="enableEditor"><i class="material-icons left">contact phone</i>Phone Number:  {{vm.user.data[0].phone_number}}</a></li>
+    </div>
+    <div ng-show="numberEditorEnabled">
+      <input ng-model="editableNumber" ng-show="numberEditorEnabled"></input>
+      <a href="#" ng-click="submitNumber()">Save</a>
+      or
+      <a href="#" ng-click="disableEditor()">Cancel</a>
+    </div>
+    <li><a href="#!"><i class="material-icons left"></i>contact mail Email: {{vm.payload.email}}</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="snb left"><i class="material-icons">menu</i></a>
     <a href="#" class="brand-logo center">Your Life List</a>

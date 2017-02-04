@@ -20,6 +20,7 @@ module.exports = function(app, express, db) {
       }
     })
       .then(function(user) {
+        console.log("I've been hit!!!")
         user.update(req.body);
       });
   });
