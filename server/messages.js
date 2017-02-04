@@ -17,7 +17,7 @@ module.exports = function(app, db) {
       "!$%&",
       "Crawl in a hole."
     ]
-    if (attempt > messages.length || attempt === undefined || attempt === null) {
+    if (attempt >= messages.length || attempt === undefined || attempt === null) {
       attempt = Math.floor(Math.random() * messages.length);
     }
     return messages[attempt];
