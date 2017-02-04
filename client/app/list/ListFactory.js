@@ -38,6 +38,13 @@
         data: data
       });
 
+    const updateUser = (email, data) =>
+      $http({
+        method: 'PUT',
+        url: `api/users/${email}`,
+        data: data
+      });
+
     const formatTime = (date, time) => {
       const formattedTimeStr = `${time.slice(0,5)} ${time.slice(5)}`
       return new Date(`${date} ${formattedTimeStr}`).toUTCString();
