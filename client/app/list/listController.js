@@ -115,5 +115,22 @@
       if (!vm.task || !vm.task.interval) { return 0; }
       return vm.task.interval;
     }
+
+    vm.numberEditorEnabled = false;
+
+    vm.enableEditor = function() {
+      vm.numberEditorEnabled = true;
+      vm.editableNumber = "";
+    }
+
+    vm.disableEditor = function() {
+      vm.numberEditorEnabled = false;
+    }
+
+    vm.submitNumber = function() {
+      vm.user.data[0].phone_number = vm.editableNumber;
+      ListFactory.updateUser(vm.payload.email, {phone_number: vm.editableNumber});
+      vm.disableEditor();
+    }
   }
 }());
