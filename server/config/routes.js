@@ -20,7 +20,8 @@ module.exports = function(app, express, db) {
       }
     })
       .then(function(user) {
-        console.log("I've been hit!!!")
+        console.log("routes 23 " + JSON.stringify(req.body));
+        console.log("routes 24 " + JSON.stringify(user));
         user.update(req.body);
       });
   });

@@ -59,15 +59,17 @@ module.exports = function(app, db) {
         return false;
       }
     }).map(function(task){
-      if (task.user.phoneNumber) {
+      console.log("m 62 " + task.user.phone_number);
+      console.log(JSON.stringify(task));
+      if (task.user.phone_number) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
         client.messages.create({
-          to: '+1' + task.user.phoneNumber,
+          to: '+1' + task.user.phone_number,
           from: '+19855098132',
           body: task.message
         }, function(err, message) {
           if (err) {
-            throw err;
+            console.log(err);
           }
           console.log(message.sid);
         });
