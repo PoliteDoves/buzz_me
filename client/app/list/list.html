@@ -46,7 +46,7 @@ $('.collapsible').collapsible();
   </div>
 
   <div ng-if="vm.displayHeaders('complete')">
-    <p class="completed-header">Completed Tasks</p>
+    <p class="completed-header">Completed Tasks<a class="delete-all right" ng-click="vm.deleteAllTasks()">Delete all completed tasks</a></p>
     <hr />
   </div>
   <div ng-repeat="task in vm.tasks.data | filter:{isCompleted: true}">
@@ -60,7 +60,7 @@ $('.collapsible').collapsible();
 
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <h1 class="modal-heading thin center-align">Text Message Alerts</h1>
+      <h1 class="modal-heading thin center-align">Alerts for {{vm.task.text}}</h1>
       <input type="date" class="datepicker" placeholder="{{vm.datePlaceHolder()}}" ng-model="vm.task.date">
       <div class="input-field col s12">
         <input placeholder="{{vm.timePlaceHolder()}}" ng-model="vm.task.time" class="timepicker" type="time">
