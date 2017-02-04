@@ -17,10 +17,10 @@ module.exports = function(app, db) {
       "!$%&",
       "Crawl in a hole."
     ]
-    var index = Math.floor(Math.random() * messages.length);
-
-    console.log(messages[index]);
-    return messages[index];
+    if (attempt > messages.length || attempt === undefined || attempt === null) {
+      attempt = Math.floor(Math.random() * messages.length);
+    }
+    return messages[attempt];
   }
 
   db.Tasks.findAll({
@@ -61,7 +61,6 @@ module.exports = function(app, db) {
     }).map(function(task){
       if (task.user.phoneNumber) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
-
         client.messages.create({
           to: '+1' + task.user.phoneNumber,
           from: '+19855098132',
