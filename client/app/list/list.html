@@ -12,14 +12,16 @@ $('.collapsible').collapsible();
       <a href="#!name"><span class="white-text name">{{vm.payload.given_name}}</span></a>
       <a href="#!email"><span class="white-text email">{{vm.payload.email}}</span></a>
     </div></li>
-    <div ng-hide="numberEditorEnabled">
-      <li ng-click="enableEditor"><a href="#!" ng-click="enableEditor"><i class="material-icons left">contact phone</i>Phone Number:  {{vm.user.data[0].phone_number}}</a></li>
-    </div>
-    <div ng-show="numberEditorEnabled">
-      <input ng-model="editableNumber" ng-show="numberEditorEnabled"></input>
-      <a href="#" ng-click="submitNumber()">Save</a>
-      or
-      <a href="#" ng-click="disableEditor()">Cancel</a>
+    <a href="#!"><li style="color:black;display: inline-flex;vertical-align: middle;" ng-hide="numberEditorEnabled" ng-click="vm.enableEditor()">
+      Phone Number: {{vm.phone}}
+    </li></a>
+    <!-- <div ng-hide="numberEditorEnabled" ng-click="vm.enableEditor()">
+      <a href="#!" style="padding: 0px;"><li style="color: black;">Phone Number: {{vm.phone}}<i class="material-icons right">contact phone</i></li></a>
+    </div> -->
+    <div ng-show="vm.numberEditorEnabled">
+      <input style="color: black;padding: 0px 32px 0px 32px;margin-bottom: 0px;" ng-model="vm.phone"></input>
+      <a href="#" ng-click="vm.submitNumber(); vm.disableEditor()">Save</a>
+      <a href="#" ng-click="vm.disableEditor()">Cancel</a>
     </div>
     <li><a href="#!"><i class="material-icons left"></i>contact mail Email: {{vm.payload.email}}</a></li>
   </ul>

@@ -13,6 +13,7 @@
     vm.time = 'Time';
     vm.id;
     vm.user;
+    vm.phone;
 
     lock.getProfile(store.get('jwt'), function (error, profile) {
       vm.payload = profile;
