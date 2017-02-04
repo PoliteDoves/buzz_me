@@ -20,10 +20,9 @@
         .then(user => {
           vm.user = user;
           ListFactory.getUserTasks(user.data[0].email)
-            .then(tasks=>{
+            .then(tasks => {
               vm.tasks = tasks
             })
-            .catch(e=>console.log('error', e))
         });
     });
 
@@ -31,11 +30,11 @@
 
     vm.submit = function(text, email) {
       ListFactory.createTask(text, email)
-        .then(task => {
-          vm.task = '';
-          ListFactory.getUserTasks(email)
-            .then(tasks=>vm.tasks = tasks)
-        })
+      .then(task => {
+        vm.task = '';
+        ListFactory.getUserTasks(email)
+          .then(tasks=>vm.tasks = tasks)
+      })
     }
 
     vm.intervalOutput = function(num) {
@@ -56,22 +55,33 @@
       }
 
       ListFactory.updateTask(vm.id, data)
-        .then((result)=>{
-          // TODO let user know it was successful
-          console.log('result', result);
-        })
+      .then((result) => {
+        // TODO let user know it was successful
+        console.log('result', result);
+      })
     }
 
     vm.completeTask = function(task) {
       ListFactory.updateTask(task.id, {isCompleted: !task.isCompleted})
-        .then(function(result) {
-          ListFactory.getUserTasks(vm.payload.email)
-            .then(tasks=>vm.tasks = tasks)
-        })
+      .then(function(result) {
+        ListFactory.getUserTasks(vm.payload.email)
+          .then(tasks=>vm.tasks = tasks)
+      })
     }
 
     vm.setTaskId = function(id) {
       vm.id = id;
+    }
+
+    vm.displayHeaders = function(complete) {
+      if (!vm.tasks.data) { return false; }
+      var completed = vm.tasks.data.filter(t => t.isCompleted);
+
+      if (complete === 'incomplete') {
+        return completed.length === vm.tasks.data.length ? false : true;
+      } else {
+        return completed.length === 0 ? false : true;
+      }
     }
   }
 }());
