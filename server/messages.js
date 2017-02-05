@@ -73,7 +73,8 @@ module.exports = function(app, db) {
           if (err) {
             console.log(err);
           }
-          console.log(message.sid);
+          console.log('mes', message);
+          db.close();
         });
       }
     });
