@@ -61,17 +61,14 @@ module.exports = function(app, db) {
         return false;
       }
     }).map(function(task){
-      console.log("m 62 " + task.user.phone_number);
-      console.log(JSON.stringify(task));
+      console.log('task', JSON.stringify(task));
       if (task.user.phone_number) {
-        console.log('task', task)
         task.message = generateMessage(task.attempt, task.dataValues.text);
-        console.log('messageEEEE', task.message);
         client.messages.create({
           to: '+1' + task.user.phone_number,
           //from: '+19855098132',
           from: twilioNumber,
-          body: task.text
+          body: task.message
         }, function(err, message) {
           if (err) {
             console.log(err);
