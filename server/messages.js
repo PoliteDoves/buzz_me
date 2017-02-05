@@ -64,7 +64,9 @@ module.exports = function(app, db) {
       console.log("m 62 " + task.user.phone_number);
       console.log(JSON.stringify(task));
       if (task.user.phone_number) {
+        console.log('task', task)
         task.message = generateMessage(task.attempt, task.dataValues.text);
+        console.log('messageEEEE', task.message);
         client.messages.create({
           to: '+1' + task.user.phone_number,
           //from: '+19855098132',
