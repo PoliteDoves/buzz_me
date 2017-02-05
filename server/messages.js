@@ -74,7 +74,6 @@ module.exports = function(app, db) {
             console.log(err);
           }
           console.log('mes', message);
-          db.close();
         });
       }
     });
