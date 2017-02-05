@@ -1,5 +1,3 @@
-
-
 <nav>
   <div class="nav-wrapper light-blue lighten-2">
   <ul id="slide-out" class="side-nav">
@@ -10,19 +8,22 @@
       <span class="white-text email">{{vm.payload.email}}</span>
     </div></li>
     <a href="#!" style="font-weight: normal;"><li ng-hide="numberEditorEnabled" ng-click="vm.enableEditor()">
-      Phone Number: {{vm.editableNumber}}
+      Phone Number: {{vm.user.phone_number}}
     </li></a>
-    <div ng-show="vm.numberEditorEnabled">
-      <input style="color: black;margin-bottom: 0px;padding: 0px 32px 0px 32px;" ng-model="vm.editableNumber" placeholder="eg 3059951026"></input>
-      <a href="#" ng-click="vm.submitNumber(); vm.disableEditor()" class="light-blue-text">Save</a>
-      <a href="#" ng-click="vm.disableEditor()" class="light-blue-text">Cancel</a>
+    <form name='phoneForm'>
+      <div ng-show="vm.numberEditorEnabled">
+        <input style="color: black;margin-bottom: 0px;padding: 0px 32px 0px 32px;" name="number" ng-pattern="vm.phoneValidator" ng-model="vm.editableNumber" placeholder="eg 3059951026" required></input>
+        <p ng-show="phoneForm.number.$invalid" class="phone-invalid">Invalid phone number. Example: 1234567890</p>
+        <a ng-show="phoneForm.number.$valid" ng-click="vm.submitNumber(); vm.disableEditor()" class="light-blue-text">Save</a>
+        <a href="#" ng-click="vm.disableEditor()" class="light-blue-text">Cancel</a>
+      </div>
+      <li style="color: black;"><a style="font-weight: normal;" href="#">Contact email: {{vm.payload.email}}</a></li>
+      <li><a ng-click="vm.authService.logout()" style="font-weight: normal;">Logout</a></li>
+    </ul>
+    </form>
+    <a href="#" data-activates="slide-out" class="snb left" style="margin-left: 36px;"><i class="material-icons">menu</i></a>
+    <span class="brand-logo center">Buzz Me!</span>
     </div>
-    <li style="color: black;"><a style="font-weight: normal;" href="#">Contact email: {{vm.payload.email}}</a></li>
-    <li><a ng-click="vm.authService.logout()" style="font-weight: normal;">Logout</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="snb left" style="margin-left: 36px;"><i class="material-icons">menu</i></a>
-  <span class="brand-logo center">Buzz Me!</span>
-  </div>
 </nav>
 
 <div class="container">
@@ -32,7 +33,7 @@
       <input id="new-task" type="text" ng-model="vm.text">
       <label for="new-task">New Task</label>
     </div>
-    <a class="btn-floating btn-small waves-effect waves-light light-blue" ng-click="vm.submit(vm.text, vm.payload.email)"><i class="material-icons">add</i></a>
+    <a class="btn-floating btn-small waves-effect waves-light light-blue" ng-disabled="!vm.text.length" ng-click="vm.submit(vm.text, vm.payload.email)"><i class="material-icons">add</i></a>
   </div>
 
   <div ng-if="vm.displayHeaders('incomplete')">
@@ -73,7 +74,8 @@
         <p>How often would you like to be reminded? {{vm.intervalOutput()}}</p>
       </div>
       <div class="center-align">
-        <a href="#!" ng-click="vm.onTextSubmit()" class="waves-effect waves-light btn-large" id="submitInterval"><i class="material-icons left">cloud</i>Buzz Me!</a>
+        <button ng-disabled="!vm.user.phone_number.length" ng-click="vm.onTextSubmit()" class="waves-effect waves-light btn-large" id="submitInterval"><i class="material-icons left">cloud</i>Buzz Me!</button>
+        <p ng-if="!vm.user.phone_number.length" class='alert'>Add phone number to profile</p>
       </div>
     </div>
   </div>

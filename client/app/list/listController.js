@@ -19,7 +19,7 @@
       vm.payload = profile;
       ListFactory.findOrCreateUser(profile.name, profile.email)
         .then(user => {
-          vm.user = user;
+          vm.user = user.data[0];
           ListFactory.getUserTasks(user.data[0].email)
             .then(tasks => {
               vm.tasks = tasks
@@ -121,7 +121,7 @@
 
     vm.enableEditor = function() {
       vm.numberEditorEnabled = true;
-      vm.editableNumber = "";
+      vm.editableNumber = vm.user.phone_number || '';
     }
 
     vm.disableEditor = function() {
@@ -129,9 +129,13 @@
     }
 
     vm.submitNumber = function() {
-      vm.user.data[0].phone_number = vm.editableNumber;
-      ListFactory.updateUser(vm.payload.email, {phone_number: vm.editableNumber});
+      ListFactory.updateUser(vm.payload.email, {phone_number: vm.editableNumber})
+        .then(user=>{
+          vm.user = user.data;
+        })
       vm.disableEditor();
     }
+
+    vm.phoneValidator = new RegExp(/^\d{10}$/);
   }
 }());
