@@ -3,6 +3,7 @@ module.exports = function(app, db) {
   var paidAccountSid = 'ACcb06a1983b396590d50965c37503ba36'
   var authToken = 'e30a358953d07da68c26d4a8537ff4b4';
   var paidAuthToken = '27da1bdd8461fc31aca5eb1504c2af9f';
+  var twilioNumber = '18557293344'
 
   var client = require('twilio')(paidAccountSid, paidAuthToken);
 
@@ -66,7 +67,8 @@ module.exports = function(app, db) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
         client.messages.create({
           to: '+1' + task.user.phone_number,
-          from: '+19855098132',
+          //from: '+19855098132',
+          from: twilioNumber,
           body: task.text
         }, function(err, message) {
           if (err) {
