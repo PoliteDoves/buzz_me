@@ -32,3 +32,14 @@
   text-transform: none;
   padding: 0px 1rem;
 }
+
+.alert {
+  color: red;
+  font-size: 15px;
+}
+
+.phone-invalid {
+  color: red;
+  font-size: 10px;
+  margin-left: 5px;
+}

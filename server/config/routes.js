@@ -23,6 +23,7 @@ module.exports = function(app, express, db) {
         console.log("routes 23 " + JSON.stringify(req.body));
         console.log("routes 24 " + JSON.stringify(user));
         user.update(req.body);
+        res.send(user);
       });
   });
 
