@@ -30,7 +30,7 @@
       <input id="new-task" type="text" ng-model="vm.text">
       <label for="new-task">New Task</label>
     </div>
-    <a class="btn-floating btn-small waves-effect waves-light light-blue" ng-click="vm.submit(vm.text, vm.payload.email)"><i class="material-icons">add</i></a>
+    <a class="btn-floating btn-small waves-effect waves-light light-blue" ng-disabled="!vm.text.length" ng-click="vm.submit(vm.text, vm.payload.email)"><i class="material-icons">add</i></a>
   </div>
 
   <div ng-if="vm.displayHeaders('incomplete')">
