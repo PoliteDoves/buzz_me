@@ -121,7 +121,7 @@
 
     vm.enableEditor = function() {
       vm.numberEditorEnabled = true;
-      vm.editableNumber = "";
+      vm.editableNumber = vm.user.data[0].phone_number || '';
     }
 
     vm.disableEditor = function() {

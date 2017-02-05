@@ -8,7 +8,7 @@
       <span class="white-text email">{{vm.payload.email}}</span>
     </div></li>
     <a href="#!" style="font-weight: normal;"><li ng-hide="numberEditorEnabled" ng-click="vm.enableEditor()">
-      Phone Number: {{vm.editableNumber}}
+      Phone Number: {{vm.user.data[0].phone_number}}
     </li></a>
     <div ng-show="vm.numberEditorEnabled">
       <input style="color: black;margin-bottom: 0px;padding: 0px 32px 0px 32px;" ng-model="vm.editableNumber" placeholder="eg 3059951026"></input>
