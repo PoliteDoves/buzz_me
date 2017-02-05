@@ -67,7 +67,7 @@ module.exports = function(app, db) {
         client.messages.create({
           to: '+1' + task.user.phone_number,
           from: '+19855098132',
-          body: task.message
+          body: task.text
         }, function(err, message) {
           if (err) {
             console.log(err);
