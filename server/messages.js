@@ -5,7 +5,7 @@ module.exports = function(app, db) {
   //var paidAuthToken = '27da1bdd8461fc31aca5eb1504c2af9f';
   var twilioNumber = '18557293344'
 
-  var client = require('twilio')(accountSid, paidAccountSid);
+  var client = require('twilio')(accountSid, authToken);
 
   //troll function
   var generateMessage = function (reminderNumber, text){
