@@ -19,6 +19,8 @@ app.use(express.static(__dirname + '/../node_modules'));
 
 require('./config/routes.js')(app, express, db);
 var sendMessages = require('./messages.js');
+
+//send messages once every minute using node's timers module
 timer.setInterval(sendMessages, 60000, app, db);
 
 
