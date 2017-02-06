@@ -1,15 +1,12 @@
 module.exports = function(app, db) {
   var accountSid = process.env.TWILIO_SID || 'ACb435c01334a13231fbb11c82d1e8968f';
-  //var paidAccountSid = 'ACcb06a1983b396590d50965c37503ba36'
   var authToken = process.env.TWILIO_AUTH  || 'e30a358953d07da68c26d4a8537ff4b4';
-  //var paidAuthToken = '27da1bdd8461fc31aca5eb1504c2af9f';
   var twilioNumber = '18557293344'
 
   var client = require('twilio')(accountSid, authToken);
 
   //troll function
   var generateMessage = function (reminderNumber, text){
-    console.log('reminder before return', reminderNumber);
     var messages = [
       "Did you " + text + " yet?",
       "When are you going to " + text + "?",
@@ -17,16 +14,13 @@ module.exports = function(app, db) {
       text + ". Just do it.",
       "Seriously, " + text + " already.",
       "Are you really this bad at life? " + text + ".",
-      "Eat dirt and " + text + ".",
-      "!$%&",
-      "Crawl in a hole."
+      "Eat dirt and " + text + "."
     ];
     //if the reminder number is invalid
     if (reminderNumber >= messages.length || !reminderNumber || reminderNumber === Infinity) {
       //generate a random reminder number
       reminderNumber = Math.floor(Math.random() * messages.length);
     }
-    console.log('reminder before return', reminderNumber);
     return messages[reminderNumber];
   }
 
@@ -81,10 +75,8 @@ module.exports = function(app, db) {
     })
     //map over the remaining tasks and send a message for each one
     .map(function(task){
-      console.log('task', task);
       if (task.user.phone_number) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
-        console.log('task message', task.message);
         //Twilio generates a using the user's phone number and the message
         client.messages.create({
           to: '+1' + task.user.phone_number,
@@ -95,7 +87,6 @@ module.exports = function(app, db) {
           if (err) {
             console.log(err);
           }
-          console.log('mes', message);
         });
       }
     });
