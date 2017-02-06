@@ -7,7 +7,8 @@ module.exports = function(app, db) {
 
   var client = require('twilio')(paidAccountSid, paidAuthToken);
 
-  var generateMessage = function (attempt, text){ //troll function
+  //troll function
+  var generateMessage = function (reminderNumber, text){
     var messages = [
       "Did you " + text + " yet?",
       "When are you going to " + text + "?",
@@ -18,13 +19,16 @@ module.exports = function(app, db) {
       "Eat dirt and " + text + ".",
       "!$%&",
       "Crawl in a hole."
-    ]
-    if (attempt >= messages.length || attempt === undefined || attempt === null || attempt === Infinity) {
-      attempt = Math.floor(Math.random() * messages.length);
+    ];
+    //if the reminder number is invalid
+    if (reminderNumber >= messages.length || reminderNumber === undefined || reminderNumber === null || reminderNumber === Infinity) {
+      //generate a random reminder number
+      reminderNumber = Math.floor(Math.random() * messages.length);
     }
-    return messages[attempt];
+    return messages[reminderNumber];
   }
 
+  //gather all tasks for every user
   db.Tasks.findAll({
     where: {
       isCompleted: false
@@ -32,27 +36,38 @@ module.exports = function(app, db) {
     include: [db.Users]
   })
   .then(function(tasks) {
+    //determine what time it is now
     var currentTime = new Date();
+    //filter out tasks that should not generate reminders
     tasks.filter(function (task) {
+      //filter out tasks without a reminder set
       if (!task.dataValues.dateTime) {
         console.log('Skipping entry because no date/time was given');
         return false;
       }
       var taskTime = new Date(task.dataValues.dateTime);
-      var msPassed = currentTime - taskTime;
-      var minPassed = Math.floor(msPassed/60000);
+      var timeBetweenNowAndTask = currentTime - taskTime;
+      //number of minutes rounded down since task has expired
+      var minutesPassed = Math.floor(timeBetweenNowAndTask/60000);
+      //task.interval is the number of minutes between reminders
       if (task.interval) {
-        var isTime = (minPassed % task.interval) === 0;
+        //it is time to send a reminder if the minutes that have passed are evenly divisible by the interval
+        var isTime = (minutesPassed % task.interval) === 0;
       } else {
         console.log('----Interval did not exist. Only sending message once----');
-        if (minPassed > 0.8) {
+        //if there is no interval, only send a message if it has been less than a minute since task expired
+        if (minutesPassed > 0.8) {
           var isTime = false;
         } else {
           var isTime = true;
         }
       }
-      task.attempt = minPassed/task.interval;
-      if (msPassed > 0 && isTime) {
+      //task.attempt is the attempt number of the reminder,
+      //it is used to send the reminders in order
+      task.attempt = minutesPassed/task.interval;
+
+      //if the task has not expired, timeBetweenNowAndTask will be negative
+      if (timeBetweenNowAndTask > 0 && isTime) {
         console.log('Returning true');
         return true;
       }
@@ -60,10 +75,12 @@ module.exports = function(app, db) {
         console.log('Returning false');
         return false;
       }
-    }).map(function(task){
-      console.log('task', JSON.stringify(task));
+    })
+    //map over the remaining tasks and send a message for each one
+    .map(function(task){
       if (task.user.phone_number) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
+        //Twilio generates a using the user's phone number and the message
         client.messages.create({
           to: '+1' + task.user.phone_number,
           //from: '+19855098132',
