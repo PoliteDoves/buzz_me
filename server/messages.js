@@ -78,8 +78,10 @@ module.exports = function(app, db) {
     })
     //map over the remaining tasks and send a message for each one
     .map(function(task){
+      console.log('task', task);
       if (task.user.phone_number) {
         task.message = generateMessage(task.attempt, task.dataValues.text);
+        console.log('task message', task.message);
         //Twilio generates a using the user's phone number and the message
         client.messages.create({
           to: '+1' + task.user.phone_number,
