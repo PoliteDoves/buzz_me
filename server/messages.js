@@ -22,7 +22,7 @@ module.exports = function(app, db) {
       "Crawl in a hole."
     ];
     //if the reminder number is invalid
-    if (reminderNumber >= messages.length || reminderNumber === undefined || reminderNumber === null || reminderNumber === Infinity) {
+    if (reminderNumber >= messages.length || !reminderNumber || reminderNumber === Infinity) {
       //generate a random reminder number
       reminderNumber = Math.floor(Math.random() * messages.length);
     }
@@ -55,6 +55,10 @@ module.exports = function(app, db) {
       if (task.interval) {
         //it is time to send a reminder if the minutes that have passed are evenly divisible by the interval
         var isTime = (minutesPassed % task.interval) === 0;
+
+        //task.attempt is the attempt number of the reminder,
+        //it is used to send the reminders in order
+        task.attempt = minutesPassed/task.interval;
       } else {
         console.log('----Interval did not exist. Only sending message once----');
         //if there is no interval, only send a message if it has been less than a minute since task expired
@@ -64,9 +68,6 @@ module.exports = function(app, db) {
           var isTime = true;
         }
       }
-      //task.attempt is the attempt number of the reminder,
-      //it is used to send the reminders in order
-      task.attempt = minutesPassed/task.interval;
 
       //if the task has not expired, timeBetweenNowAndTask will be negative
       if (timeBetweenNowAndTask > 0 && isTime) {
