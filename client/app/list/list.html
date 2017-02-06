@@ -17,7 +17,7 @@
         <a ng-show="phoneForm.number.$valid" ng-click="vm.submitNumber(); vm.disableEditor()" class="light-blue-text">Save</a>
         <a href="#" ng-click="vm.disableEditor()" class="light-blue-text">Cancel</a>
       </div>
-      <li style="color: black;"><a style="font-weight: normal;" href="#">Contact email: {{vm.payload.email}}</a></li>
+      <li style="color: black;"><a style="font-weight: normal;" href="#">Email: {{vm.payload.email}}</a></li>
       <li><a ng-click="vm.authService.logout()" style="font-weight: normal;">Logout</a></li>
     </ul>
     </form>
