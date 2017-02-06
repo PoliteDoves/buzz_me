@@ -9,6 +9,7 @@ module.exports = function(app, db) {
 
   //troll function
   var generateMessage = function (reminderNumber, text){
+    console.log('reminder before return', reminderNumber);
     var messages = [
       "Did you " + text + " yet?",
       "When are you going to " + text + "?",
@@ -25,6 +26,7 @@ module.exports = function(app, db) {
       //generate a random reminder number
       reminderNumber = Math.floor(Math.random() * messages.length);
     }
+    console.log('reminder before return', reminderNumber);
     return messages[reminderNumber];
   }
 
