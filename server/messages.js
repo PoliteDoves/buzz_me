@@ -1,11 +1,9 @@
 module.exports = function(app, db) {
-  var accountSid = 'ACb435c01334a13231fbb11c82d1e8968f';
-  var paidAccountSid = 'ACcb06a1983b396590d50965c37503ba36'
-  var authToken = 'e30a358953d07da68c26d4a8537ff4b4';
-  var paidAuthToken = '27da1bdd8461fc31aca5eb1504c2af9f';
+  var accountSid = process.env.TWILIO_SID || 'ACb435c01334a13231fbb11c82d1e8968f';
+  var authToken = process.env.TWILIO_AUTH  || 'e30a358953d07da68c26d4a8537ff4b4';
   var twilioNumber = '18557293344'
 
-  var client = require('twilio')(paidAccountSid, paidAuthToken);
+  var client = require('twilio')(accountSid, authToken);
 
   //troll function
   var generateMessage = function (reminderNumber, text){
@@ -16,12 +14,10 @@ module.exports = function(app, db) {
       text + ". Just do it.",
       "Seriously, " + text + " already.",
       "Are you really this bad at life? " + text + ".",
-      "Eat dirt and " + text + ".",
-      "!$%&",
-      "Crawl in a hole."
+      "Eat dirt and " + text + "."
     ];
     //if the reminder number is invalid
-    if (reminderNumber >= messages.length || reminderNumber === undefined || reminderNumber === null || reminderNumber === Infinity) {
+    if (reminderNumber >= messages.length || !reminderNumber || reminderNumber === Infinity) {
       //generate a random reminder number
       reminderNumber = Math.floor(Math.random() * messages.length);
     }
@@ -53,6 +49,10 @@ module.exports = function(app, db) {
       if (task.interval) {
         //it is time to send a reminder if the minutes that have passed are evenly divisible by the interval
         var isTime = (minutesPassed % task.interval) === 0;
+
+        //task.attempt is the attempt number of the reminder,
+        //it is used to send the reminders in order
+        task.attempt = minutesPassed/task.interval;
       } else {
         console.log('----Interval did not exist. Only sending message once----');
         //if there is no interval, only send a message if it has been less than a minute since task expired
@@ -62,9 +62,6 @@ module.exports = function(app, db) {
           var isTime = true;
         }
       }
-      //task.attempt is the attempt number of the reminder,
-      //it is used to send the reminders in order
-      task.attempt = minutesPassed/task.interval;
 
       //if the task has not expired, timeBetweenNowAndTask will be negative
       if (timeBetweenNowAndTask > 0 && isTime) {
@@ -90,7 +87,6 @@ module.exports = function(app, db) {
           if (err) {
             console.log(err);
           }
-          console.log('mes', message);
         });
       }
     });
